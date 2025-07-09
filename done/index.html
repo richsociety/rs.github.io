@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rich Society UG</title>
+    <link rel="stylesheet" href="done.css">
+    <link rel="icon" type="image/png" href="/images/LOO.png">
+</head>
+<style class="text/css">
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fafafa;
+    color: #222;
+    transition: background 0.3s, color 0.3s;
+}
+
+header {
+    background: #222;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav a.active {
+    color: #fff !important;
+    background: #1a8917;
+    border-radius: 8px;
+    padding: 0.3em 1em;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+
+body.dark-mode nav a.active {
+    background: #90ee90;
+    color: #181818 !important;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    width: 100%;
+}
+
+#product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: stretch;
+    margin-top: 2rem;
+}
+
+.product-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    width: 340px; /* Increased from 260px */
+    min-height: 520px; /* Optional: make taller */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.2rem; /* More padding */
+    transition: box-shadow 0.2s;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: #f3f3f3; /* optional: adds a subtle background */
+}
+
+.product-card h3 {
+    margin: 0.5rem 0 0.25rem 0;
+    font-size: 1.2rem;
+}
+
+.product-card p {
+    margin: 0.25rem 0;
+    color: #444;
+    font-size: 1rem;
+}
+
+.price {
+    color: #1a8917;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#filters {
+    background: #fff;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#filters form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+#filters label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+#filters select {
+    margin-top: 0.5rem;
+    padding: 0.4rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.site-logo {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+#theme-toggle {
+    margin-left: auto;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: none;
+    background: #eee;
+    color: #222;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background: #181818;
+    color: #f3f3f3;
+}
+
+body.dark-mode header,
+body.dark-mode #filters,
+body.dark-mode .product-card {
+    background: #232323;
+    color: #f3f3f3;
+    border-color: #333;
+}
+
+body.dark-mode nav a {
+    color: #fff;
+}
+
+body.dark-mode .product-card {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+body.dark-mode .price {
+    color: #90ee90;
+}
+
+body.dark-mode #theme-toggle {
+    background: #333;
+    color: #f3f3f3;
+}
+
+.contact-btn {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: none;
+    background: #25d366;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+    display: inline-block;
+}
+
+.contact-btn:hover {
+    background: #128c7e;
+}
+
+body.dark-mode .contact-btn {
+    background: #128c7e;
+    color: #fff;
+}
+
+.coming-soon {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #888;
+    margin: 2rem 0;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+footer {
+    text-align: center;
+    width: 100%;
+}
+
+.footer-social {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: center;
+}
+.social-icon {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.2s;
+    vertical-align: middle;
+}
+.social-icon:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+.sponsor-logo {
+    width: 120px;   /* smaller width */
+    height: 40px;   /* smaller height */
+    object-fit: contain;
+    position: absolute;
+    left: 0; top: 0;
+    opacity: 0;
+    transition: opacity 0.7s;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.sponsor-logo.active {
+    opacity: 1;
+    z-index: 2;
+}
+.sponsor-carousel {
+    position: relative;
+    width: 120px;   /* match logo width */
+    height: 40px;   /* match logo height */
+    margin: 0 auto;
+}
+
+.order-btn {
+    display: inline-block;
+    margin-top: 0.7rem;
+    padding: 0.5rem 1.2rem;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.order-btn:hover {
+    background: #128c7e;
+}
+
+.order-modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.order-modal-content {
+    background: #fff;
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    max-width: 350px;
+    width: 95vw;
+    position: relative;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+.order-modal-close {
+    position: absolute;
+    right: 1rem; top: 1rem;
+    font-size: 2rem;
+    color: #888;
+    cursor: pointer;
+}
+.order-modal label {
+    display: block;
+    margin: 1rem 0 0.5rem 0;
+    font-weight: bold;
+}
+.order-modal input, .order-modal select {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background: #fff;
+    min-width: 180px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    border-radius: 8px;
+    z-index: 10;
+    padding: 0.5rem 0;
+}
+
+nav ul li:hover .dropdown-menu,
+nav ul li:focus-within .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    display: block;
+    margin: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    color: #222;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 0;
+    background: none;
+}
+
+.dropdown-menu a:hover {
+    background: #1a8917;
+    color: #fff;
+}
+
+@media (max-width: 700px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .site-logo {
+        height: 60px;
+        width: 60px;
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    #filters form {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .product-card {
+        width: 98vw;
+        min-width: unset;
+        max-width: 400px;
+        margin: 1rem auto;
+    }
+    .order-modal-content {
+        max-width: 98vw;
+        padding: 1rem 0.5rem;
+    }
+}
+
+/* Make product cards and forms flexible */
+#product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.product-card {
+    width: 320px;
+    max-width: 95vw;
+    margin: 1rem;
+    box-sizing: border-box;
+}
+
+#filters form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+</style>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="images/LOO.png" alt="Rich Society UG Logo" class="site-logo" style="height:60px; margin-right:1rem;">
+            <h1>Welcome to Rich Society UG</h1>
+            <div>
+                <button id="theme-toggle" aria-label="Toggle light and dark mode">🌙 Dark Mode</button>
+                <button id="whatsapp-contact" class="contact-btn" aria-label="Contact us on WhatsApp">📱 Contact Us</button>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#" class="active">Menu ▼</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#all" onclick="document.getElementById('category-filter').value=''; filterProducts();">All</a>
+                        </li>
+                        <li>
+                            <a href="#hoodies" onclick="document.getElementById('category-filter').value='hoodies'; filterProducts();">Hoodies</a>
+                        </li>
+                        <li>
+                            <a href="#sweatshirts" onclick="document.getElementById('category-filter').value='sweatshirts'; filterProducts();">Sweatshirts</a>
+                        </li>
+                        <li>
+                            <a href="#tshirts" onclick="document.getElementById('category-filter').value='tshirts'; filterProducts();">T-Shirts</a>
+                        </li>
+                        <li>
+                            <a href="#phonecovers" onclick="document.getElementById('category-filter').value='phonecovers'; filterProducts();">Phone Covers</a>
+                        </li>
+                         <li>
+                            <a href="#sandals" onclick="document.getElementById('category-filter').value='sandals'; filterProducts();">Sandals</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="filters">
+            <h3>Filter Products</h3>
+            <form id="filter-form">
+                <label>
+                    Category:
+                    <select id="category-filter">
+                        <option value="">All</option>
+                        <option value="hoodies">Hoodies</option>
+                        <option value="sweatshirts">Sweatshirts</option>
+                        <option value="tshirts">T-Shirts</option>
+                        <option value="phonecovers">Phone Covers</option>
+                    </select>
+                </label>
+                <label>
+                    Price:
+                    <select id="price-filter">
+                        <option value="">All</option>
+                        <option value="0-30000">Under UGX 30,000</option>
+                        <option value="30000-50000">UGX 30,000 - UGX 50,000</option>
+                        <option value="50000-1000000">Above UGX 50,000</option>
+                    </select>
+                </label>
+                <label>
+                    Color:
+                    <select id="color-filter">
+                        <option value="">All</option>
+                        <option value="black">Black</option>
+                        <option value="white">White</option>
+                        <option value="red">Red</option>
+                        <option value="plain">Plain</option>
+                        <option value="mixed">Mixed Colors</option>
+                    </select>
+                </label>
+                <label>
+                    Size:
+                    <select id="size-filter">
+                        <option value="">All</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                </label>
+            </form>
+        </section>
+        <section id="products">
+            <h2>Our Products</h2>
+            <div id="product-list"></div>
+        </section>
+
+        <section id="sponsors">
+            <h2>Our Sponsors</h2>
+            <div class="sponsor-carousel">
+                <img class="sponsor-logo active" src="images/sponsor1.png" alt="Sponsor 1" />
+                <img class="sponsor-logo" src="images/sponsor2.png" alt="Sponsor 2" />
+                <img class="sponsor-logo" src="images/sponsor3 copy.png" alt="Sponsor 3" />
+                <img class="images/sponsor3.png" alt="Sponsor 4" />
+                <!-- Add more sponsor logos as needed -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+    <p>&copy; 2023 Rich Society UG. All rights reserved.</p>
+    <div class="footer-social">
+        <a href="https://wa.me/256743152857" target="_blank" aria-label="WhatsApp">
+            <img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="WhatsApp" class="social-icon" />
+        </a>
+        <a href="https://instagram.com/richsocietyug" target="_blank" aria-label="Instagram">
+            <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" class="social-icon" />
+        </a>
+        <a href="mailto:richsocietyug@gmail.com" aria-label="Email">
+            <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Email" class="social-icon" />
+        </a>
+    </div>
+</footer>
+
+<div id="order-modal" class="order-modal" style="display:none;">
+  <div class="order-modal-content">
+    <span class="order-modal-close" id="order-modal-close">&times;</span>
+    <h2>Complete Your Order</h2>
+    <form id="order-form">
+      <input type="hidden" id="order-product" name="product">
+      <input type="hidden" id="order-image" name="image">
+      <label>
+        Your Name:
+        <input type="text" id="order-name" name="name" required>
+      </label>
+      <label>
+        Phone Number:
+        <input type="tel" id="order-phone" name="phone" required>
+      </label>
+      <label>
+        Region:
+        <select id="order-region" name="region" required>
+          <option value="">Select your region</option>
+          <option value="Kampala Region">Kampala Region</option>
+          <option value="Entebbe Region">Entebbe Region</option>
+          <option value="Eastern Region">Eastern Region</option>
+          <option value="Northern Region">Northern Region</option>
+          <option value="Western Region">Western Region</option>
+          <option value="Other Regions">Other Regions</option>
+        </select>
+      </label>
+      <label>
+        Address/Location:
+        <input type="text" id="order-location" name="location" required>
+      </label>
+      <button type="submit" class="order-btn" style="width:100%;">Order on WhatsApp</button>
+    </form>
+  </div>
+</div>
+
+<div id="payment-modal" class="order-modal" style="display:none;">
+  <div class="order-modal-content">
+    <span class="order-modal-close" id="payment-modal-close">&times;</span>
+    <h2>Payment Instructions</h2>
+    <p><strong>MTN Mobile Money:</strong> 077X XXX XXX (Your Name)</p>
+    <p><strong>Airtel Money:</strong> 070X XXX XXX (Your Name)</p>
+    <p>After payment, please send your transaction ID to WhatsApp: <a href="https://wa.me/256743152857" target="_blank">256743152857</a></p>
+    <button class="order-btn" id="close-payment-modal" style="width:100%;margin-top:1rem;">Close</button>
+  </div>
+</div>
+
+    <script>
+        const products = [
+  {
+    id: 1,
+    name: "Red and Black Hoodie",
+    category: "hoodies",
+    price: 50000,
+    color: "mixed",
+    colorType: "mixed",
+    size: ["M", "L", "XL"],
+    image: "images/red n black.png",
+    description: "A comfy, stylish hoodie for all seasons."
+  },
+  {
+    id: 2,
+    name: "Grey and Black Hoodie",
+    category: "hoodies",
+    price: 50000,
+    color: "mixed",
+    colorType: "mixed",
+    size: ["S", "M", "L"],
+    image: "images/grey n b.png",
+    description: "Stay warm and look cool with our hoodie."
+  },
+  {
+    id: 3,
+    name: "Black Arizona Sandal",
+    category: "Sandles",
+    price: 45000,
+    color: "black",
+    colorType: "black",
+    size: ["39", "40", "41", "42"],
+    image: "images/sa1.jpeg",
+    description: "Keep up with the latest trends among the youth."
+  },
+  {
+    id: 4,
+    name: "Black Clogs",
+    category: "sandals",
+    price: 50000,
+    color: "black",
+    colorType: "black",
+    size: ["S", "M", "L"],
+    image: "images/san2.jpeg",
+    description: "Stay warm and look cool with our sweatshirt."
+  },
+  {
+    id: 5,
+    name: "Premium Sweatshirt",
+    category: "sweatshirts",
+    price: 50000,
+    color: "white",
+    colorType: "plain",
+    size: ["S", "M", "L"],
+    image: "images/san3.jpeg",
+    description: "Stay warm and look cool with our sweatshirt."
+  },
+  {
+    id: 2,
+    name: "Premium Sweatshirt",
+    category: "sweatshirts",
+    price: 50000,
+    color: "white",
+    colorType: "plain",
+    size: ["S", "M", "L"],
+    image: "images/san3.jpeg",
+    description: "Stay warm and look cool with our sweatshirt."
+  },
+  {
+    id: 2,
+    name: "Premium Sweatshirt",
+    category: "sweatshirts",
+    price: 50000,
+    color: "white",
+    colorType: "plain",
+    size: ["S", "M", "L"],
+    image: "images/san5.jpeg",
+    description: "Stay warm and look cool with our sweatshirt."
+  },
+  {
+    id: 2,
+    name: "Premium Sweatshirt",
+    category: "sweatshirts",
+    price: 50000,
+    color: "white",
+    colorType: "plain",
+    size: ["S", "M", "L"],
+    image: "images/zipp.png",
+    description: "Stay warm and look cool with our sweatshirt."
+  },
+  {
+    id: 2,
+    name: "Premium Sweatshirt",
+    category: "sweatshirts",
+    price: 50000,
+    color: "white",
+    colorType: "plain",
+    size: ["S", "M", "L"],
+    image: "images/zip2.png",
+    description: "Stay warm and look cool with our sweatshirt."
+  },
+  {
+    id: 2,
+    name: "Premium Sweatshirt",
+    category: "sweatshirts",
+    price: 50000,
+    color: "white",
+    colorType: "plain",
+    size: ["S", "M", "L"],
+    image: "images/sweetwite.",
+    description: "Stay warm and look cool with our sweatshirt."
+  },
+  {
+    id: 3,
+    name: "Logo T-Shirt",
+    category: "tshirts",
+    price: 50000,
+    color: "red",
+    colorType: "mixed",
+    size: ["S", "M", "L", "XL"],
+    image: "images/cream n black.png",
+    description: "Show off your style with our branded t-shirt."
+  },
+
+];
+
+function displayProducts(filteredProducts) {
+  const productList = document.getElementById('product-list');
+  if (!filteredProducts.length) {
+    productList.innerHTML = "<p>No products found.</p>";
+    return;
+  }
+  productList.innerHTML = filteredProducts.map(product => `
+    <div class="product-card" id="${product.category}">
+      <img src="${product.image}" alt="${product.name}" />
+      <h3>${product.name}</h3>
+      <p>${product.description}</p>
+      <span class="price">UGX ${product.price.toLocaleString()}</span>
+      <p>Color: ${product.color}</p>
+      <p>Sizes: ${product.size.join(", ")}</p>
+      <div class="rating-card">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+        <span class="rating-label">Rate this product</span>
+      </div>
+      <select class="delivery-region" onchange="updateDeliveryFee(this)" style="margin:0.7rem 0; width: 90%; padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc;">
+        <option value="">Select your region</option>
+        <option value="Kampala Region">Kampala Region</option>
+        <option value="Entebbe Region">Entebbe Region</option>
+        <option value="Eastern Region">Eastern Region</option>
+        <option value="Northern Region">Northern Region</option>
+        <option value="Western Region">Western Region</option>
+        <option value="Other Regions">Other Regions</option>
+      </select>
+      <div class="delivery-fee" style="margin-bottom:0.7rem; color:#1a8917; font-weight:bold;"></div>
+      <a href="#" 
+         class="order-btn" 
+         aria-label="Order via Google Form"
+         onclick="event.preventDefault(); orderNow('${product.name}', '${product.image}')">
+        Order Now
+      </a>
+    </div>
+  `).join('');
+
+  // Add interactive rating logic
+  document.querySelectorAll('.rating-card').forEach(card => {
+    const stars = card.querySelectorAll('.star');
+    stars.forEach(star => {
+      star.addEventListener('click', function() {
+        const value = parseInt(this.getAttribute('data-value'));
+        stars.forEach((s, i) => {
+          s.style.color = i < value ? '#FFD700' : '#ccc';
+        });
+        card.querySelector('.rating-label').textContent = `You rated: ${value} star${value > 1 ? 's' : ''}`;
+      });
+    });
+  });
+}
+
+// Show delivery fee based on region
+function updateDeliveryFee(select) {
+    const feeDiv = select.closest('.product-card').querySelector('.delivery-fee');
+    let fee = '';
+    switch (select.value) {
+        case 'Kampala Region':
+        case 'Entebbe Region':
+            fee = 'UGX 4,500';
+            break;
+        case 'Western Region':
+            fee = 'UGX 15,000';
+            break;
+        case 'Eastern Region':
+            fee = 'UGX 20,000';
+            break;
+        case 'Northern Region':
+            fee = 'UGX 30,000';
+            break;
+        case 'Other Regions':
+            fee = 'UGX 50,000';
+            break;
+        default:
+            fee = '';
+    }
+    feeDiv.textContent = fee ? `Delivery Fee: ${fee}` : '';
+}
+
+// Update orderOnWhatsApp to remove location
+function orderOnWhatsApp(btn, productName) {
+    const card = btn.closest('.product-card');
+    const regionSelect = card.querySelector('.delivery-region');
+    const feeDiv = card.querySelector('.delivery-fee');
+    const region = regionSelect && regionSelect.value ? ` (${regionSelect.value})` : '';
+    let message = `Hello, I want to order the ${productName}${region}`;
+    if (feeDiv && feeDiv.textContent) {
+        message += `%0A${feeDiv.textContent}`;
+    }
+    window.open(`https://wa.me/256743152857?text=${message}`, '_blank');
+}
+
+function filterProducts() {
+  const category = document.getElementById('category-filter').value;
+  const price = document.getElementById('price-filter').value;
+  const color = document.getElementById('color-filter').value;
+  const size = document.getElementById('size-filter').value;
+
+  let filtered = products.filter(product => {
+    let match = true;
+    if (category && product.category !== category) match = false;
+    // Color filter: check for color or colorType
+    if (color) {
+      if (["plain", "mixed"].includes(color)) {
+        if (product.colorType !== color) match = false;
+      } else {
+        if (product.color !== color) match = false;
+      }
+    }
+    if (size && !product.size.includes(size)) match = false;
+    if (price) {
+      const [min, max] = price.split('-').map(Number);
+      if (product.price < min || product.price > max) match = false;
+    }
+    return match;
+  });
+
+  displayProducts(filtered);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  displayProducts(products);
+  document.getElementById('filter-form').addEventListener('change', filterProducts);
+});
+
+// Theme toggle logic
+const themeToggle = document.getElementById('theme-toggle');
+function setTheme(dark) {
+    document.body.classList.toggle('dark-mode', dark);
+    themeToggle.textContent = dark ? '☀️ Light Mode' : '🌙 Dark Mode';
+}
+// Load theme from localStorage
+const darkMode = localStorage.getItem('darkMode') === 'true';
+setTheme(darkMode);
+themeToggle.addEventListener('click', () => {
+    const isDark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+    themeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+});
+
+// WhatsApp contact button logic
+document.getElementById('whatsapp-contact').addEventListener('click', function() {
+    window.open('https://wa.me/256743152857', '_blank');
+});
+
+// Highlight nav tab based on hash
+function highlightActiveTab() {
+    document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === window.location.hash) {
+            link.classList.add('active');
+        }
+    });
+}
+window.addEventListener('hashchange', highlightActiveTab);
+window.addEventListener('DOMContentLoaded', highlightActiveTab);
+
+// Simple sponsor logo carousel
+const sponsorLogos = document.querySelectorAll('.sponsor-logo');
+let sponsorIndex = 0;
+setInterval(() => {
+    sponsorLogos[sponsorIndex].classList.remove('active');
+    sponsorIndex = (sponsorIndex + 1) % sponsorLogos.length;
+    sponsorLogos[sponsorIndex].classList.add('active');
+}, 2000); // Change logo every 2 seconds
+
+function openOrderModal(productName, productImage) {
+    document.getElementById('order-modal').style.display = 'flex';
+    document.getElementById('order-product').value = productName;
+    document.getElementById('order-image').value = productImage;
+}
+document.getElementById('order-modal-close').onclick = function() {
+    document.getElementById('order-modal').style.display = 'none';
+};
+window.onclick = function(event) {
+    if (event.target === document.getElementById('order-modal')) {
+        document.getElementById('order-modal').style.display = 'none';
+    }
+};
+
+// Replace with your Google Form's POST URL (not the viewform URL!)
+const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/FORM_ID/formResponse";
+
+// Replace with your actual entry IDs
+const ENTRY_PRODUCT = "entry.123456789";
+const ENTRY_IMAGE = "entry.987654321";
+const ENTRY_NAME = "entry.111111111";
+const ENTRY_PHONE = "entry.222222222";
+const ENTRY_REGION = "entry.333333333";
+const ENTRY_LOCATION = "entry.444444444";
+
+document.getElementById('order-form').onsubmit = function(e) {
+    e.preventDefault();
+    const product = document.getElementById('order-product').value;
+    const image = document.getElementById('order-image').value;
+    const name = document.getElementById('order-name').value;
+    const phone = document.getElementById('order-phone').value;
+    const region = document.getElementById('order-region').value;
+    const location = document.getElementById('order-location').value;
+
+    const formData = new FormData();
+    formData.append(ENTRY_PRODUCT, product);
+    formData.append(ENTRY_IMAGE, image);
+    formData.append(ENTRY_NAME, name);
+    formData.append(ENTRY_PHONE, phone);
+    formData.append(ENTRY_REGION, region);
+    formData.append(ENTRY_LOCATION, location);
+
+    fetch(GOOGLE_FORM_ACTION_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+    }).then(() => {
+        alert("Order submitted! We will contact you soon.");
+        document.getElementById('order-modal').style.display = 'none';
+    });
+};
+
+// Add this function to handle direct redirect to Google Form with prefilled product info
+function orderNow(productName, productImage) {
+    const product = encodeURIComponent(productName);
+    const image = encodeURIComponent(productImage);
+    // Replace with your actual Google Form entry IDs
+    const ENTRY_PRODUCT = "entry.123456789";
+    const ENTRY_IMAGE = "entry.987654321";
+    const prefillUrl = `https://docs.google.com/forms/d/e/1FAIpQLSfR3i-Xp1257pWX6P-rkKhr4ynsEXzKKhchfRSPW6AEwjf3oA/viewform?usp=pp_url&${ENTRY_PRODUCT}=${product}&${ENTRY_IMAGE}=${image}`;
+    window.open(prefillUrl, '_blank');
+}
+    </script>
+</body>
+</html>
